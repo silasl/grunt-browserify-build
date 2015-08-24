@@ -1,0 +1,14 @@
+{
+  "name": "grunt-browserify-build",
+  "version": "1.0.0",
+  "authors": [
+    "Silas Landricombe <si@siland.co.uk>"
+  ],
+  "description": "Grunt browserify build",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "spin.js": "~2.3.2",
+    "magnific-popup": "~1.0.0"
+  }
+}
