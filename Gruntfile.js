@@ -17,19 +17,20 @@ module.exports = function (grunt) {
             target: 'public/js/vendor/vendor.js'
         },
         less: {
-            all: {
-                files: {
-                    'public/css/styles.css': 'src/client/less/main.less'
-                }
-            },
             dev: {
                 options: {
                     sourceMap: true
+                },
+                files: {
+                    'public/css/styles.css': 'src/client/less/main.less'
                 }
             },
             release: {
                 options: {
                     sourceMap: false
+                },
+                files: {
+                    'public/css/styles.css': 'src/client/less/main.less'
                 }
             }
         },
@@ -58,17 +59,15 @@ module.exports = function (grunt) {
             }
         },
         browserify: {
-            all: {
-                files: {
-                    'public/js/module.js': ['src/index.js']
-                }
-            },
             dev: {
                 options: {
                     browserifyOptions: {
                         debug: true
                     },
                     watch: true
+                },
+                files: {
+                    'public/js/module.js': ['src/index.js']
                 }
             },
             release: {
@@ -76,6 +75,9 @@ module.exports = function (grunt) {
                     browserifyOptions: {
                         debug: false
                     }
+                },
+                files: {
+                    'public/js/module.js': ['src/index.js']
                 }
             }
         },
@@ -121,13 +123,13 @@ module.exports = function (grunt) {
     }
 
     // Master
-    grunt.registerTask('dev', ['bower_concat', 'css-compile-dev', 'browserifyBower', 'js-compile-dev', 'watch']);
+    grunt.registerTask('dev', ['bower_concat', 'css-compile-dev', 'js-compile-dev', 'watch']);
     grunt.registerTask('release', ['bower_concat', 'css-compile-rel', 'browserifyBower', 'js-compile-rel']);
 
     // Slave
     grunt.registerTask('css-compile-dev', ['less:dev', 'postcss:dev']);
-    grunt.registerTask('js-compile-dev', ['browserify:dev', 'jshint']);
+    grunt.registerTask('js-compile-dev', ['browserifyBower', 'browserify:dev', 'jshint']);
 
     grunt.registerTask('css-compile-rel', ['less:release', 'postcss:release']);
-    grunt.registerTask('js-compile-rel', ['browserify:release', 'uglify']);
+    grunt.registerTask('js-compile-rel', ['browserifyBower', 'browserify:release', 'uglify']);
 };
