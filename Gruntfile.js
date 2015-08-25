@@ -50,6 +50,7 @@ module.exports = function (grunt) {
                 options: {
                     map: false,
                     processors: [
+                        require('autoprefixer-core')({browsers: 'last 1 version'}),
                         require('csswring')
                     ]
                 },
