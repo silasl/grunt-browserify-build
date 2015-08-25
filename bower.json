@@ -1,6 +1,6 @@
 {
   "name": "grunt-browserify-build",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     "Silas Landricombe <si@siland.co.uk>"
   ],
