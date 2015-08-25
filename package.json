@@ -1,6 +1,6 @@
 {
   "name": "grunt-browserify-build",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Grunt browserify build",
   "license": "MIT",
   "devDependencies": {
