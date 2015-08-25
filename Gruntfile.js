@@ -1,3 +1,13 @@
+var pkg = require('./package'),
+    path = require('path');
+
+function rename_release(v) {
+    return function (d, f) {
+        var dest = path.join(d, f.replace(/(\.min)?(\.js|\.css)?$/, '-' + v + '$1$2'));
+        return dest;
+    };
+}
+
 module.exports = function (grunt) {
     grunt.initConfig({
         bower_concat: {
@@ -97,6 +107,23 @@ module.exports = function (grunt) {
         jshint: {
             all: ['Gruntfile.js', 'src/**/*.js']
         },
+        copy: {
+            release: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: [
+                            'build/css/styles.min.css',
+                            'build/vendor.min.js',
+                            'build/application.min.js'
+                        ],
+                        dest: 'release/',
+                        rename: rename_release(pkg.version)
+                    }
+                ]
+            }
+        },
         watch: {
             js: {
                 files: ['public/js/module.js'],
@@ -132,5 +159,5 @@ module.exports = function (grunt) {
     grunt.registerTask('js-compile-dev', ['browserifyBower', 'browserify:dev', 'jshint']);
 
     grunt.registerTask('css-compile-rel', ['less:release', 'postcss:release']);
-    grunt.registerTask('js-compile-rel', ['browserifyBower', 'browserify:release', 'uglify']);
+    grunt.registerTask('js-compile-rel', ['browserifyBower', 'browserify:release', 'uglify', 'copy']);
 };
