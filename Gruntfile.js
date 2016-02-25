@@ -12,6 +12,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         bower_concat: {
             all: {
+                dest: 'public/js/vendor/vendor.js',
                 cssDest: 'src/client/less/vendor.less'
             }
         },
@@ -60,7 +61,7 @@ module.exports = function (grunt) {
                 options: {
                     map: false,
                     processors: [
-                        require('autoprefixer-core')({browsers: 'last 1 version'}),
+                        require('autoprefixer')({browsers: 'last 1 version'}),
                         require('csswring')
                     ]
                 },
